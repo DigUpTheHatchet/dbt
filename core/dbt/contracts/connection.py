@@ -128,11 +128,12 @@ class Credentials(
             'type not implemented for base credentials class'
         )
 
-    @abc.abstractproperty
+    @property
     def unique_field(self) -> str:
-        raise NotImplementedError(
-            'type not implemented for base credentials class'
-        )
+        """Hashed and included in anonymous telemetry to track adapter adoption.
+        Pick a field that can uniquely identify one team/organization using this adapter
+        """
+        return None
 
     def hashed_unique_field(self) -> str:
         return hashlib.md5(self.unique_field.encode('utf-8')).hexdigest()
